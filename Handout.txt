@@ -1,0 +1,78 @@
+CS296-25 Final Project
+Adventure Handout
+yijunl4 and jiaxili3
+
+This is a game with many rooms.
+Your goal is to find the key and unlock the chest.
+You can find monsters and useful items in your journey to the chest.
+You will lose the game if your hp < 0.
+
+-room
+Map Of Room
+1 -2 -3 -4 -5
+|  |  |  |  |
+6 -7 -8 -9 -10
+|  |  |  |  |
+11-12-13-14-15
+|  |  |  |  |
+16-17-18-19-20
+|  |  |  |  |
+21-22-23-24-25
+
+There are altogether 25 rooms in the maze. Inside each room,
+you can find nothing, an item, a monster, or a trap. Those things
+will be randomly located in the maze.
+
+There are several action you can take in each room.
+If there is an item in the room, you can take up the item or leave it there.
+Besides, you can choose to [M]ove to the North, the South, the East, or the West
+by entering the room number of the next room.
+You can also check your [S]tatus. Or you can [Q]uit the game.
+
+-Status
+If you choose to check your status, you will be able to see your current
+hp and your inventory. You can also see the rooms that you have visited.
+You can also take actions with your inventory.
+You can choose to [U]se the item, [D]rop the item, [E]xamine the item, or do [N]othing.
+By examining the item, you could find the description of the effect of that item.
+
+-vocation
+In the start of the game, you will have to choose between warrior
+or rouge. Different vacation will have different initial hp.
+Each vocation will have a special ability that can be use only
+once. Warrior has the ability to miss the attack of a monster. Rouge
+has the ability to miss the trap.
+
+-monster
+There are altogether 4 different monsters in the rooms. If you meet a goblin,
+you will lose 6 hp. If you meet a smile, you will lose 4 hp.
+
+-trap
+If you enter a room with trap, you will be in abnormal status. In this
+status, you will lose 1 hp each time you move to other room. This status
+will be moved after you make 10 moves.
+
+-hp
+The initial hp for warrior is 18. The initial hp for rouge is 15.
+You will lose the game if your hp is lower than 0.
+
+-item
+You could take up different items in your adventure. Each item has
+different effect.
+
+-item-medicine
+If you use the medicine, your hp will increase by 5.
+If you drop the medicine in the ground, your abnormal status
+will be removed.
+
+-item-torch
+If you use the torch, you can examine a room and know the detail of that room.
+If you drop the torch, it will disappear.
+
+-item-key
+If you use the key, you will know the room that has the chest.
+
+-chest
+A chest can be locked or unlocked. If you come to the room of the chest with no
+key, it will remain locked. If you come to the room of chest with a key,
+you will unlock the chest and win the game.
