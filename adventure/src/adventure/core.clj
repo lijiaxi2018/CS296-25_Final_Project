@@ -25,7 +25,7 @@
 
 
 
-(defn init-adventurer []
+(defn init-adventurer [adv]
   (do
     (println "Please choose your vocation")
     (println "Rouge can avoid the attack of the trap")
@@ -38,14 +38,14 @@
          :abnormal 0
          :ability 1
          :vocation 0
-         :seen #{}}
+         :seen #{adv}}
          (= choice "W")
         {:inventory #{"torch"}
          :hp 18
          :abnormal 0
          :ability 1
          :vocation 1
-         :seen #{}}
+         :seen #{adv}}
         :else (do (println "It is a invalid vocation.")
                   (println "You will become a rouge by default!")
                   {:inventory #{"torch"}
@@ -53,7 +53,7 @@
                    :abnormal 0
                    :ability 1
                    :vocation 1
-                   :seen #{}}
+                   :seen #{adv}}
           )
       )
     )
@@ -77,7 +77,7 @@
         :medicine medicine
         :adventurer adv :treasure treasure
         :chest :locked
-        :status (init-adventurer)
+        :status (init-adventurer adv)
         })
 )
 
@@ -116,16 +116,23 @@
 (defn lighttorch [state]
   (do (println "You have just used the torch, now you can examine a room")
       (println "Which room do you want to examine? Please enter a number")
-      (let [loc (read-line)]
-        (let [newstate (removeinven "torch" state)]
-          (cond (or (= loc (:slime1 state)) (= loc (:slime2 state))) (do (println "There is a slime there!") newstate)
-              (or (= loc (:goblin1 state)) (= loc (:goblin2 state))) (do (println "There is a goblin there!") newstate)
-              (= loc (:trap state)) (do (println "There is a trap here!") newstate)
-              (= loc (:treasure state)) (do (println "There is a chest here!") newstate)
-              (= loc (:key state)) (do (println "There is a key here!") newstate)
-              (= loc (:medicine state)) (do (println "There is a medicine here!") newstate)
-              :else (do (println "This room is not special") newstate)
+      (let [loc (try
+                    (read-string (read-line))
+                    (catch Exception e "Please enter the room number"))]
+        (if (or (not (instance? Number loc)) (< loc 1) (> loc 25))
+          (do (println "Use of torch failed, please enter a valid room number")
+          state)
+          (let [newstate (removeinven "torch" state)]
+            (cond (or (= loc (:slime1 state)) (= loc (:slime2 state))) (do (println "There is a slime there!") newstate)
+                (or (= loc (:goblin1 state)) (= loc (:goblin2 state))) (do (println "There is a goblin there!") newstate)
+                (= loc (:trap state)) (do (println "There is a trap here!") newstate)
+                (= loc (:treasure state)) (do (println "There is a chest here!") newstate)
+                (= loc (:key state)) (do (println "There is a key here!") newstate)
+                (= loc (:medicine state)) (do (println "There is a medicine here!") newstate)
+                :else (do (println "This room is not special") newstate)
+            )
           )
+
         )
       )
   )
